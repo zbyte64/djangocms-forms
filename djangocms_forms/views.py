@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect
-from django.http import Http404
+from django.http import Http404, HttpResponse
 from django.utils.http import is_safe_url
 from django.utils.html import strip_tags
 from django.utils.translation import ugettext_lazy as _
@@ -24,7 +24,11 @@ except ImportError:
 
 class FormSubmission(FormView):
     form_class = FormBuilder
-    http_method_names = ['post']
+    http_method_names = ['get', 'post']
+
+    def get(self, request):
+        #410 Gone is the proper way to signal a resource that existed is no longer around
+        return HttpResponse(_('Gone'), status=410)
 
     def get_form_kwargs(self):
         form_kwargs = super(FormSubmission, self).get_form_kwargs()
