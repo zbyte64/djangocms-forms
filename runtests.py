@@ -19,9 +19,33 @@ try:
             'django.contrib.contenttypes',
             'django.contrib.sites',
             'djangocms_forms',
+            'menus',
+            'cms',
+            'treebeard',
         ],
         SITE_ID=1,
         NOSE_ARGS=['-s'],
+        TEMPLATES = [
+            {
+                'BACKEND': 'django.template.backends.django.DjangoTemplates',
+                'DIRS': [],
+                'APP_DIRS': True,
+                'OPTIONS': {
+                    'context_processors': [
+                        'django.template.context_processors.debug',
+                        'django.template.context_processors.request',
+                        'django.contrib.auth.context_processors.auth',
+                        'django.template.context_processors.i18n',
+                        'django.template.context_processors.media',
+                        'django.template.context_processors.csrf',
+                        'django.template.context_processors.tz',
+                        'sekizai.context_processors.sekizai',
+                        'django.template.context_processors.static',
+                        'cms.context_processors.cms_settings',
+                    ],
+                },
+            },
+        ]
     )
 
     try:
